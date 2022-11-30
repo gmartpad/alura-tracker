@@ -21,6 +21,7 @@ import { defineComponent } from 'vue';
 import TrackerTimer from './TrackerTimer.vue'
 export default defineComponent({
   name: 'TrackerTimerController',
+  emits: ['whenFinished'],
   components: {
     TrackerTimer
   },
@@ -41,6 +42,8 @@ export default defineComponent({
     finalizar(){
       this.cronometroRodando = false
       clearInterval(this.cronometro)
+      this.$emit('whenFinished', this.tempoEmSegundos)
+      this.tempoEmSegundos = 0
     }
   }
 })
